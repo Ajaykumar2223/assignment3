@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JWT Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Login</h1>
+
+    <input type="text" id="username"
+           placeholder="Enter Username">
+
+    <input type="password" id="password"
+           placeholder="Enter Password">
+
+    <button onclick="login()">Login</button>
+
+    <button onclick="getProfile()">View Profile</button>
+
+    <p id="result"></p>
+
+</div>
+
+<script>
+
+let token = '';
+
+async function login() {
+
+    const username =
+        document.getElementById('username').value;
+
+    const password =
+        document.getElementById('password').value;
+
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    });
+
+    const data = await response.json();
+
+    document.getElementById('result').innerText =
+        data.message;
+
+    if (response.ok) {
+        token = data.token;
+    }
+}
+
+async function getProfile() {
+
+    const response = await fetch('/profile', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    });
+
+    const data = await response.json();
+
+    document.getElementById('result').innerText =
+        JSON.stringify(data, null, 2);
+}
+
+</script>
+
+</body>
+</html>

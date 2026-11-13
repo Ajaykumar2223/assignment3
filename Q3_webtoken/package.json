@@ -1,0 +1,17 @@
+{
+    "username": "ajay",
+    "password": "12345"
+}
+{
+    "message": "Login successful",
+    "token": "eyJhbGciOiJIUzI1NiIs..."
+}
+{
+    "message": "Welcome to your profile",
+    "username": "ajay",
+    "email": "ajay@gmail.com",
+    "course": "Node.js"
+}
+{
+    "message": "Access denied. Token is missing!" 
+}
